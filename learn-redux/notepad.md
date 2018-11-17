@@ -4,7 +4,6 @@ A quick place for notes about stuff that I pick up throughout the [Learn Redux][
 
 ---
 
-
 ### `React.cloneElement()` and `props.children`
 
 So quick refresher because I totally forgot about the existance of `props.children`. Essentially it allows you to plan where the contents of a component may go when rendered. Take a look:
@@ -59,5 +58,43 @@ Simple enough. You can render whatever you want, where ever you want. But with t
 In order to do that, we can use the React Top-Level API to clone an element with the props nested!
 
 ```js
+//Header.js
+
+const Headline = props => (
+  <div className="page-header">
+    <h2 className="article-title">{props.title}</h2>
+    <section className="article-info">
+      React.cloneElement(props.children, props)
+    </section>
+  </div>
+);
 
 ```
+
+Now we will generate the same HTML, except our `props` information is easily passed down. It essentially is the same as having the following JSX snippet:
+
+```js
+<Headline title="A crazy story!">
+  <Writer title="A crazy story!" />
+  <Editor title="A crazy story!" />
+  <Publisher title="A crazy story!" />
+  <Content title="A crazy story!" />
+</Headline>
+```
+
+---
+
+### Index Routes
+
+React Router allows you to create nested routes by simply putting `<Route>` component within another `<Route>` component. With this, you get the following:
+
+```js
+<Route path="/" component={Main}>  //Always render the Main component
+  <IndexRoute component={PhotoGrid} /> //Default to the PhotoGrid component 
+  <Route path="/view/:postID" component={Single} /> //On route '/view/anything' show the Single component
+</Route>
+```
+
+This can be useful when creating complicated nested logic for single page applications. Remember though, this is client-side routing, and doesn't actually ping the server when switching routes.
+
+---

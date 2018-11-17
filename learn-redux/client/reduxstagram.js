@@ -12,18 +12,14 @@ import PhotoGrid from './components/PhotoGrid';
 //Import React Router Dependencies
 import { Router, Route, IndexRoute, browserHistory } from 'react-router';
 
-const router = (
+const Reduxstagram = () => (
   <Router history={browserHistory}>
     <Route path="/" component={Main}>
       <IndexRoute component={PhotoGrid} />
+      <Route path="/view/:postID" component={Single} />
     </Route>
     <Route path="/" component={Main} />
   </Router>
 );
 
-render(
-  <Main>
-    <p>test</p>
-  </Main>,
-  document.getElementById('root')
-);
+render(<Reduxstagram />, document.getElementById('root'));
