@@ -98,3 +98,18 @@ React Router allows you to create nested routes by simply putting `<Route>` comp
 This can be useful when creating complicated nested logic for single page applications. Remember though, this is client-side routing, and doesn't actually ping the server when switching routes.
 
 ---
+
+### Redux Stores
+
+Stores are a concept in Redux which contain the global state of your application. Every state of every component covered under the store is contained in one simple place. We can instanitate a store via the following:
+
+```js
+//Create an object for our default state;
+const defaultState = { posts, comments };
+
+const store = createStore(rootReducer, defaultState);
+
+export const history = syncHistoryWithStore(browserHistory, store);
+
+export default store;
+```
