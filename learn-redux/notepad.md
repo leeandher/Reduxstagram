@@ -113,3 +113,5 @@ export const history = syncHistoryWithStore(browserHistory, store);
 
 export default store;
 ```
+
+### Redux Actions
