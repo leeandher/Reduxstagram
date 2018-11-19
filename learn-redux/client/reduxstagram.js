@@ -10,16 +10,20 @@ import Single from './components/Single';
 import PhotoGrid from './components/PhotoGrid';
 
 //Import React Router Dependencies
-import { Router, Route, IndexRoute, browserHistory } from 'react-router';
+import { Router, Route, IndexRoute } from 'react-router';
+import { Provider } from 'react-redux';
+import store, { history } from './store';
 
 const Reduxstagram = () => (
-  <Router history={browserHistory}>
-    <Route path="/" component={Main}>
-      <IndexRoute component={PhotoGrid} />
-      <Route path="/view/:postID" component={Single} />
-    </Route>
-    <Route path="/" component={Main} />
-  </Router>
+  <Provider store={store}>
+    <Router history={history}>
+      <Route path="/" component={Main}>
+        <IndexRoute component={PhotoGrid} />
+        <Route path="/view/:postID" component={Single} />
+      </Route>
+      <Route path="/" component={Main} />
+    </Router>
+  </Provider>
 );
 
 render(<Reduxstagram />, document.getElementById('root'));

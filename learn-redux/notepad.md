@@ -115,3 +115,5 @@ export default store;
 ```
 
 ### Redux Actions
+### Redux Reducers
+### Redux Providers
