@@ -1,5 +1,5 @@
 //Increment likes
-export function Increment(index) {
+export function increment(index) {
   return {
     type: 'INCREMENT_LINKS',
     index

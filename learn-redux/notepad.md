@@ -117,3 +117,20 @@ export default store;
 ### Redux Actions
 ### Redux Reducers
 ### Redux Providers
+
+
+//action ->
+//info on what happened and what needs to change
+
+// reducer --> does the editing of state
+
+we dispatch an action, and the reducer will handle the action
+
+everytime you dispatch an action, every single reducer will run
+whether something should change is up to your reducer logic
+
+connect --> inject the data at whatever level we need it. (instead of passing down from parents to children via props)
+
+cnonect the data to our component, then make action creaters
+expose our functions to buttons
+expose our data to components
