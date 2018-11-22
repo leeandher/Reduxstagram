@@ -5,7 +5,6 @@ A reducer takes in two things:
 */
 
 function comments(state = [], action) {
-  console.log(state, action);
   return state;
 }
 

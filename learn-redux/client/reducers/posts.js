@@ -5,9 +5,14 @@ A reducer takes in two things:
 */
 
 function posts(state = [], action) {
-  console.log('the post will change');
-  console.log(state, action);
-  return state;
+  switch (action.type) {
+    case 'INCREMENT_LIKES':
+      console.log('incrementing likes!');
+    //return the updated state
+    default:
+      //Don't do anything!
+      return state;
+  }
 }
 
 export default posts;
