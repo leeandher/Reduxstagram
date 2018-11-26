@@ -7,7 +7,10 @@ A reducer takes in two things:
 function comments(state = [], action) {
   switch (action.type) {
     case 'ADD_COMMENT':
-      const
+      const newComment = { text: action.comment, user: action.author };
+      const newState = { ...state };
+      newState[action.postId].push(newComment);
+      return newState;
     case 'REMOVE_COMMENT':
     default:
       return state;
