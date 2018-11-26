@@ -8,10 +8,13 @@ function comments(state = [], action) {
   switch (action.type) {
     case 'ADD_COMMENT':
       const newComment = { text: action.comment, user: action.author };
-      const newState = { ...state };
-      newState[action.postId].push(newComment);
-      return newState;
+      const addCommentState = { ...state };
+      addCommentState[action.postId].push(newComment);
+      return addCommentState;
     case 'REMOVE_COMMENT':
+      const removeCommentState = { ...state };
+      removeCommentState[action.postId].splice(action.index, 1);
+      return removeCommentState;
     default:
       return state;
   }

@@ -18,8 +18,9 @@ class Comments extends React.Component {
     e.target.reset();
   }
 
-  handleDelete(e) {
-    console.log(e);
+  handleDelete(index) {
+    const { postId } = this.props.params;
+    this.props.removeComment(postId, index);
   }
 
   renderComment(comment, i) {
@@ -28,7 +29,10 @@ class Comments extends React.Component {
         <p>
           <strong>{comment.user}</strong>
           {comment.text}
-          <button className="remove-comment" onClick={this.handleDelete}>
+          <button
+            className="remove-comment"
+            onClick={() => this.handleDelete(i)}
+          >
             &times;
           </button>
         </p>
