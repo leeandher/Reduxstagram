@@ -1,5 +1,26 @@
 import React from 'react';
+import Photo from './Photo';
+import Comments from './Comments';
 
-const Single = () => <div className="single-photo">I am the Single Photo</div>;
+//Import comments
+
+const Single = (props) => {
+  //Get the matching posted photo
+  const { postId } = props.params;
+  const i = props.posts.findIndex((post) => post.code === postId);
+  const post = props.posts[i];
+
+  //Get the matching comments
+  const postComments = props.comments[postId] || [];
+
+  return (
+    <div className="single-photo">
+      <Photo index={i} post={post} {...props} />
+      <Comments postComments={postComments} />
+    </div>
+  );
+};
+//Info
+//info
 
 export default Single;

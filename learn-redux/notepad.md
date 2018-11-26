@@ -91,7 +91,7 @@ React Router allows you to create nested routes by simply putting `<Route>` comp
 ```js
 <Route path="/" component={Main}>  //Always render the Main component
   <IndexRoute component={PhotoGrid} /> //Default to the PhotoGrid component 
-  <Route path="/view/:postID" component={Single} /> //On route '/view/anything' show the Single component
+  <Route path="/view/:postId" component={Single} /> //On route '/view/anything' show the Single component
 </Route>
 ```
 
