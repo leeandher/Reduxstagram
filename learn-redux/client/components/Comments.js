@@ -1,9 +1,17 @@
 import React from 'react';
 
 class Comments extends React.Component {
+  constructor(props) {
+    super(props);
+    this.handleSubmit = this.handleSubmit.bind(this);
+  }
+
   handleSubmit(e) {
     e.preventDefault();
-    console.log(this.refs);
+    const { postId } = this.props.params;
+    const author = this.refs.author.value;
+    const comment = this.refs.comment.value;
+    this.props.addComment(postId, author, comment);
   }
 
   renderComment(comment, i) {

@@ -5,7 +5,13 @@ A reducer takes in two things:
 */
 
 function comments(state = [], action) {
-  return state;
+  switch (action.type) {
+    case 'ADD_COMMENT':
+      const
+    case 'REMOVE_COMMENT':
+    default:
+      return state;
+  }
 }
 
 export default comments;
