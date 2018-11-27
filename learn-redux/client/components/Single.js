@@ -20,7 +20,5 @@ const Single = (props) => {
     </div>
   );
 };
-//Info
-//info
 
 export default Single;
