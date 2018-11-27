@@ -14,12 +14,26 @@ import { Router, Route, IndexRoute } from 'react-router';
 import { Provider } from 'react-redux';
 import store, { history } from './store';
 
-import Raven from 'raven-js';
-import { sentry_url } from './data/config';
+/* CRASH REPORTING */
 
+//Import our SDK
+import Raven from 'raven-js';
+//Import our error stream (and a custom exception handling method)
+import { sentry_url, logException } from './data/config';
+
+//Let Sentry watch our code for errors
 Raven.config(sentry_url).install();
 
-console.log('window'.iser());
+//Don't send an error with a stack trace, just send a message
+// Raven.captureMessage('Something went wrong!');
+
+//Ask the user for feedback when an error occurs
+// Raven.showReportDialog();
+
+//If the exception goes through, send the error with some additional info
+// logException(new Error('Some error occured!'), {
+//   email: 'fake@gmail.com'
+// });
 
 const Reduxstagram = () => (
   <Provider store={store}>
