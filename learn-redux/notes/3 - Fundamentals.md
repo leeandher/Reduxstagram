@@ -96,3 +96,45 @@ _Note:_ We've also added the `routing` reducer, which comes from `react-router-r
 
 ## Creating a Store
 
+
+
+## Reducer Composition
+
+One of the fundamental patterns of building Redux apps is the ability to offshell work into **subreducers**. These are kind of like helper functions which don't take in the entire state for modification, but can instead operate on just a _slice_ that is passed to it.
+
+Think about this; your store (or your global state) is an object. That object could have arrays, which contain objects, whose keys contain arrays, booleans and more objects and even just reading that was a little bit too hard. Trying to keep every piece of state the same in our _pure function_ reducer is difficult.
+
+This can be simplified if we break up our operations into subreducers, using these guys to make modifications to smaller pieces of data. Take this for example:
+
+```js
+function postComments(state = [], action) {
+  switch (action.type) {
+    case 'ADD_COMMENT':
+      //Add a comment to the nested state
+      return [...state, { user: action.author, text: action.comment }];
+    case 'REMOVE_COMMENT':
+      const i = action.index;
+      return [
+        //everything before this post
+        ...state.slice(0, i),
+        //everything after this post
+        ...state.slice(i + 1)
+      ];
+    default:
+      return state;
+  }
+}
+
+function comments(state = [], action) {
+  if (typeof action.postId !== 'undefined') {
+    return {
+      ...state,
+      //Offload the nested state to a subreducer
+      [action.postId]: postComments(state[action.postId], action)
+    };
+  }
+  return state;
+}
+```
+
+With that code, we don't have to worry about ensuring all the data is returned in one step with some complicated nested logic, we get a logical, operational reducer!
