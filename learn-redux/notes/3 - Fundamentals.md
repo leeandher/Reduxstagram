@@ -130,4 +130,24 @@ Effectively, this code is swapping the existing reducer with the new one (which 
 
 ---
 
-## Using Redux DevTools
+## Using Enhancers
+
+Redux is also capable of allowing for debugging via _time-travelling_ through the operation history. This is used most commonly via the Redux DevTools (browser extension). Unlike React, Redux DevTools don't simply hook up to the app by default, they have to be connected. To do so, we specifiy the enhancer and the store as follows:
+
+```js
+//Specify `compose`
+import { createStore, compose } from 'redux';
+
+//Allow for the Redux DevTools to run on this app
+const enhancers = compose(
+  window.devToolsExtension ? window.devToolsExtension() : (f) => f
+);
+
+const store = createStore(rootReducer, defaultState, enhancers);
+```
+
+## Reducer Restrictions
+
+Simply put, you cannot use asyncronous code in your reducers, they will NOT work! If there is ever a need to do so there are external libraries/packages which may help, namely [`redux-saga`](https://github.com/redux-saga/redux-saga) or [`redux-thunk`](https://github.com/reduxjs/redux-thunk). The author of Redux also made a helpful package for dealing with heavily nested JSON responses called [`normalizr`](https://github.com/paularmstrong/normalizr), so that could also be of assistance.
+
+---

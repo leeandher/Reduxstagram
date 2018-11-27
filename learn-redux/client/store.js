@@ -13,7 +13,12 @@ import posts from './data/posts';
 //Create an object for our default state;
 const defaultState = { posts, comments };
 
-const store = createStore(rootReducer, defaultState);
+//Allow for the Redux DevTools to run on this app
+const enhancers = compose(
+  window.devToolsExtension ? window.devToolsExtension() : (f) => f
+);
+
+const store = createStore(rootReducer, defaultState, enhancers);
 
 export const history = syncHistoryWithStore(browserHistory, store);
 
