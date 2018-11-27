@@ -111,3 +111,23 @@ export default App;
 Now we simply replace `Main` with `App` in our router, and we can access the global state via the `Main` component's props!
 
 ---
+
+## Hot Reloading Redux Reducers (w/ Webpack)
+
+Commonly with `create-react-app` applications, we'd like to set up our webpack to hot-reload on any change, but Redux reducers will usually through an error telling you that they require a hard reload. Instead, we can just modify our webpack build in order to let swap out our reducers whenever we should hot-reload them.
+
+```js
+//In ./store.js
+if (module.hot) {
+  module.hot.accept('./reducers/', () => {
+    const newRootReducer = require('./reducers/index').default;
+    store.replaceReducer(newRootReducer);
+  });
+}
+```
+
+Effectively, this code is swapping the existing reducer with the new one (which has been modified on save), whenever webpack is not uptodate, and would be hot-reloading.
+
+---
+
+## Using Redux DevTools

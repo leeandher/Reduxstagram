@@ -24,6 +24,14 @@ import { sentry_url, logException } from './data/config';
 //Let Sentry watch our code for errors
 Raven.config(sentry_url).install();
 
+//Send custom data along with all errors
+// Raven.config(sentry_url, {
+//   tags: {
+//     git_commit: 'asdf9876',
+//     userLevel: 'editor'
+//   }
+// }).install();
+
 //Don't send an error with a stack trace, just send a message
 // Raven.captureMessage('Something went wrong!');
 

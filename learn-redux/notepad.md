@@ -1,10 +1,10 @@
-## Learn Redux
+# Learn Redux
 
 A quick place for notes about stuff that I pick up throughout the [Learn Redux][learnredux.com] course.
 
 ---
 
-### `React.cloneElement()` and `props.children`
+## `React.cloneElement()` and `props.children`
 
 So quick refresher because I totally forgot about the existance of `props.children`. Essentially it allows you to plan where the contents of a component may go when rendered. Take a look:
 
@@ -84,7 +84,7 @@ Now we will generate the same HTML, except our `props` information is easily pas
 
 ---
 
-### Index Routes
+## Index Routes
 
 React Router allows you to create nested routes by simply putting `<Route>` component within another `<Route>` component. With this, you get the following:
 
@@ -99,38 +99,62 @@ This can be useful when creating complicated nested logic for single page applic
 
 ---
 
-### Redux Stores
+## Sentry Error Watching
 
-Stores are a concept in Redux which contain the global state of your application. Every state of every component covered under the store is contained in one simple place. We can instanitate a store via the following:
+[Sentry](sentry.io) is an online error-tracking service which can make it easy to follow and get information about bug reports in many different applications. For the purpose of this course, Sentry was used to report errors in a front-end React/Redux application. To get started with sentry in frontend JS, it's best to set up a config file.
 
 ```js
-//Create an object for our default state;
-const defaultState = { posts, comments };
+// config.js
+import Raven from 'raven-js';
 
-const store = createStore(rootReducer, defaultState);
-
-export const history = syncHistoryWithStore(browserHistory, store);
-
-export default store;
+//Our app specific Sentry URL
+const sentry_key = '09d93d04d1464364a4f37ada41799fc3';
+const sentry_app = '1331156';
+export const sentry_url = `https://${sentry_key}@app.getsentry.com/${sentry_app}`;
 ```
 
-### Redux Actions
-### Redux Reducers
-### Redux Providers
+Now we go to the root of our application (or whever we may choose) and we can create an error stream. When we access the `sentry_url` and sign in with the appropriate credentials, Sentry will tell us exactly what happened to cause the error, and that can help us (as developers) solve the issue quickly.
 
+```js
+//Import our SDK
+import Raven from 'raven-js';
+//Import our error stream (and a custom exception handling method)
+import { sentry_url, logException } from './data/config';
 
-//action ->
-//info on what happened and what needs to change
+//Let Sentry watch our code for errors
+Raven.config(sentry_url).install();
+```
 
-// reducer --> does the editing of state
+The following are some examples of how we can use Sentry's error tracking API to organize how we combat bugs.
 
-we dispatch an action, and the reducer will handle the action
+```js
+//Send custom data along with all errors
+Raven.config(sentry_url, {
+  tags: {
+    git_commit: 'asdf9876',
+    userLevel: 'editor'
+  }
+}).install();
 
-everytime you dispatch an action, every single reducer will run
-whether something should change is up to your reducer logic
+//Don't send an error with a stack trace, just send a message
+Raven.captureMessage('Something went wrong!');
 
-connect --> inject the data at whatever level we need it. (instead of passing down from parents to children via props)
+//Ask the user for feedback when an error occurs
+Raven.showReportDialog();
+  
+//You can declare a logException method in your config.js for simplicity
+export function logException(ex, context) {
+  Raven.captureException(ex, {
+    extra: context
+  });
+  /*eslint no-console:0*/
+  window && window.console && console.error && console.error(ex);
+}
 
-cnonect the data to our component, then make action creaters
-expose our functions to buttons
-expose our data to components
+//If the exception goes through, send the error with some additional info
+logException(new Error('Some error occured!'), {
+  email: 'fake@gmail.com'
+});
+```
+
+---
