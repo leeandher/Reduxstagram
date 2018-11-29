@@ -18,6 +18,8 @@ The app itself is only uses a single `store`, with one `Provider` component, pas
 
 As for the URL, `react-router` is used in tandom with redux to allow for page-changing to log the `PAGE_CHANGE` action. It can also be tracked via the [Redux DevTools](https://chrome.google.com/webstore/detail/redux-devtools/lmhkpmbekcpmknklioeibfkpmmfibljd?hl=en)!
 
+Another cool little bit is that this entire app is being watched by [Sentry](sentry.io) for error tracking! Pretty cool little addition.
+
 ## Creds
 
 I was able to create this application through the help of a course, developed by [Wes Bos](wesbos.com) entitled [Learn Redux](learnredux.com). If you've stumbled upon this repo, in attempt to learn Redux, I highly recommend his courses and wish you the best of luck!
