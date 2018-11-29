@@ -50,8 +50,8 @@ class Comments extends React.Component {
             ref="commentForm"
             onSubmit={this.handleSubmit}
           >
-            <input type="text" ref="author" placeholder="author" />
-            <input type="text" ref="comment" placeholder="comment" />
+            <input type="text" ref="author" placeholder="author" required />
+            <input type="text" ref="comment" placeholder="comment" required />
             <input type="submit" hidden />
           </form>
         </div>
