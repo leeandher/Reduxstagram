@@ -3,7 +3,6 @@ import React from 'react';
 class Comments extends React.Component {
   constructor(props) {
     super(props);
-
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleDelete = this.handleDelete.bind(this);
     this.renderComment = this.renderComment.bind(this);
