@@ -16,7 +16,7 @@ This app was actually bootstrapped a long time ago, so it doesn't use `create-re
 
 The app itself is only uses a single `store`, with one `Provider` component, passing along to a `connect`ed _App_ component. In Redux' global state, the comments, likes, captions, and authors are stored for every post. 
 
-As for the URL, `react-router` is used in tandom with redux to allow for page-changing to log the `PAGE_CHANGE` action. It can also be tracked via the [Redux DevTools](https://chrome.google.com/webstore/detail/redux-devtools/lmhkpmbekcpmknklioeibfkpmmfibljd?hl=en)!
+As for the URL, `react-router` is used in tandem with redux to allow for page-changing to log the `PAGE_CHANGE` action. It can also be tracked via the [Redux DevTools](https://chrome.google.com/webstore/detail/redux-devtools/lmhkpmbekcpmknklioeibfkpmmfibljd?hl=en)!
 
 Another cool little bit is that this entire app is being watched by [Sentry](sentry.io) for error tracking! Pretty cool little addition.
 
