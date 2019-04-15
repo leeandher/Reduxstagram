@@ -187,6 +187,11 @@ h1 {
   letter-spacing: -1px;
   text-shadow: 0px 4px 0 rgba(18, 86, 136, 0.11);
 }
+@media (max-width: 580px) {
+  h1 {
+    font-size: 8rem;
+  }
+}
 h1 a {
   color: #125688;
   text-decoration: none;
