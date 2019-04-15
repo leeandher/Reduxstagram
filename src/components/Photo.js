@@ -1,8 +1,8 @@
-import React from 'react';
-import { Link } from 'react-router';
-import CSSTransitionGroup from 'react-addons-css-transition-group';
+import React from 'react'
+import { Link } from 'react-router'
+import CSSTransitionGroup from 'react-addons-css-transition-group'
 
-const Photo = (p) => (
+const Photo = p => (
   <figure className="grid-figure">
     <div className="grid-photo-wrap">
       <Link to={`/view/${p.post.code}`}>
@@ -39,6 +39,6 @@ const Photo = (p) => (
       </div>
     </figcaption>
   </figure>
-);
+)
 
-export default Photo;
+export default Photo
